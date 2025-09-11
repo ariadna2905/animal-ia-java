@@ -1,0 +1,22 @@
+# NetBeans
+nbproject/private/
+build/
+dist/
+*.war
+*.ear
+
+# Archivos compilados
+*.class
+*.jar
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Archivos de configuración específicos
+manifest.mf
+*.properties
