@@ -1,20 +1,25 @@
-
 package animal;
 
 public class Animal {
 
-   
     public static void main(String[] args) {
-        // TODO code application logic here
-        animalBR obr=new animalBR();
-        String aux;
-        aux=obr.getVertebrado1("si","no","no","no");
+        animalBR obr = new animalBR();
+        String resultado;
         
-        System.out.println("V1= "+aux);
+        // Ejemplo 1: Identificar Bipes biporus (Lagarto topo mexicano)
+        resultado = obr.identificarEspecie(
+            "Animalia", "Chordata", "Reptilia", "Squamata", 
+            "Amphisbaenidae", "Bipes", "2 patas delanteras", 
+            "reducidos", "anilladas", "subterraneo"
+        );
+        System.out.println("Especie identificada: " + resultado);
         
-        aux=obr.getVertebrado2("AVE","si","si");
-        
-        System.out.println("V1= "+aux);
+        // Ejemplo 2: Identificar Iguana iguana
+        resultado = obr.identificarEspecie(
+            "Animalia", "Chordata", "Reptilia", "Squamata", 
+            "Iguanidae", "Iguana", "4 patas desarrolladas", 
+            "desarrollados", "quilladas", "arboricola"
+        );
+        System.out.println("Especie identificada: " + resultado);
     }
-    
 }
