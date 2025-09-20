@@ -152,6 +152,7 @@ import Rule.*;
                         new Clause(NombreComun, igual, "Reptil no identificado")});
     }
 }*/
+//prueba
 
 public class animalBR {
 
