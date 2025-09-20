@@ -168,7 +168,7 @@ public class animalBR {
     RuleVariable Genero;
     
     // Variables morfológicas y de comportamiento
-    RuleVariable Extremidades;k
+    RuleVariable Extremidades;
     RuleVariable Ojos;
     RuleVariable Escamas;
     RuleVariable Habitat;
