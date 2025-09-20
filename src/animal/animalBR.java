@@ -235,7 +235,7 @@ public class animalBR {
         Tamano = new RuleVariable(br, "Tamano");
         Dieta = new RuleVariable(br, "Dieta");
         Especie = new RuleVariable(br, "Especie");
-        NombreComun = new RuleVariable(br, "NombreComun");
+       // NombreComun = new RuleVariable(br, "NombreComun");
 
         Condition igual = new Condition("=");
 
