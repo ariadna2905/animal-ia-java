@@ -412,7 +412,7 @@ public class animalBR {
             new Clause[]{new Clause(Especie, igual, "Desconocida"),
                         new Clause(NombreComun, igual, "Reptil no identificado")});
     }
-
+    //QUITAR 
     // Método para obtener resultados individuales
     public String getEspecie() {
         return resultadoEspecie;

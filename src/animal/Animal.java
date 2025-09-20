@@ -6,7 +6,7 @@ public class Animal {
         animalBR obr = new animalBR();
         String resultado;
         
-        // Ejemplo 1: Identificar Bipes biporus (Lagarto topo mexicano)
+        // Ejemplo 1: Identificar Bipes biporus (Lagarto topo mexicano) //PRUEBA
         resultado = obr.identificarEspecie(
             "Animalia", "Chordata", "Reptilia", "Squamata", 
             "Amphisbaenidae", "Bipes", "2 patas delanteras", 
