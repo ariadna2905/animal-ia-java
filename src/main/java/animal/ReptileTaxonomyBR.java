@@ -1,7 +1,7 @@
 package animal;
 
-import java.util.concurrent.locks.Condition;
-import Rule.*;
+import animal.rule.*;
+import animal.rule.Condition;
 
 public class ReptileTaxonomyBR {
 
@@ -80,7 +80,7 @@ public class ReptileTaxonomyBR {
 
     // Variables para micrurus
     RuleVariable AnillosTricolor, AnillosNegrosAnchos, CabezaNegra, ColaCorta;
-    RuleVariable DistribucionCentroamerica, DistribucionSudamerica, DistribucionMexico;
+    RuleVariable DistribucionCentroamerica, DistribucionSudamerica, DistribucionMexico, EstadoOaxaca;
     RuleVariable HabitatSelva, HabitatBosqueSeco, HabitatAcuario, AnilloBlancoPresente;
 
     // Variables para Abronia
@@ -90,89 +90,74 @@ public class ReptileTaxonomyBR {
     String resultadoClasificacion;
 
     public String clasificarReptilCompleto(
-            // Parámetros Reino
-            String unicelulares, String fotosintesis, String esporas,
-            String ambientesExtremos, String movilidadActiva,
-
-            // Parámetros Filo
-            String simetriaRadial, String tejidosVerdaderos, String segmentacion,
-            String digestivoCompleto, String notocorda, String conchaCalcarea, String quetas,
-
-            // Parámetros Clase
-            String sangreFria, String huevoAmniotico, String garrasDedos, String corazonTresCamaras,
-            String pielSecaEscamosa, String mandibulas, String aletasLobuladas,
-            String radiosOseosAletas, String esqueletoOseo,
-
-            // Parámetros Orden
-            String fecundacionInterna, String caparazonOseo,
-            String mudaPiel, String tercerOjoParietal, String cuidadoParental,
-
-            // Parámetros Familia
-            String dientesPleurodontes, String lenguaCortaNoBifida, String termorregulador,
-            String escamasEspinosas, String extremidadesReducidas, String ojosParpadosMoviles,
-            String pupilasVerticales, String venenoPotente, String autotomiaCaudal,
-            String habitosArboricolas, String carnivoros, String huevosCascaraCalcarea,
-            String marino, String terrestre, String escudosAusentes,
-            String caparazonAlto, String caparazonAplanado, String cabezaGrandeAlargada,
-            String habitatPrincipalUSA, String habitatPrincipalAustralia,
-
-            // Parámetros Género
-            String dosPatasTraseras, String ojosReducidos, String adaptadoExcavar,
-            String cuerpoAlargadoCilindrico, String sinPatas, String venenoso,
-            String pielOsteodermos, String lagartosParpadosMoviles, String geckos,
-            String espolonesPelvicos, String escamasVertHilerasTransv, String escamasDorsalesQuilladas,
-
-            // Parámetros Especie
-            String endemicoMexico, String peninsulaBajaCalifornia, String estadoGuerrero,
-            String estadoMichoacan, String chiapasGuatemala, String hastaCostaRica,
-            String tamanoAdulto24cm, String tamanoAdulto18cm, String colorUniformeOscuro,
-            String coloracionRosadaPalida,
-
-            // Variables adicionales
-            String herbivoro, String omnivoro, String crestaDorsal, String espinosasCola,
-            String adaptacionDesierto, String endemicoIslas, String peligroExtincion,
-            
-            // Variables Anolis
-            String tieneLamelas, String escamasEspecializadas, String papadaSuperReducida,
-            String capacidadAutotomiaCaudal, String papadaExtensible, String papadaGrande,
-            String porosFemorales, String colorVerdePredominante, String habitatUrbano,
-            String dewlapRojo, String escamasRugosas,
-
-            // Variables Tortugas
-            String distribucionTropical, String dietaHerbivora, String picoFuerteCrustaceos,
-            String dietaPastosMarinos,
-
-            // Variables Elápidos
-            String cuerpoCilindrico, String pupilaRedonda, String patronAnillo,
-            String habitatAcuatico, String habitatArboreo, String expandeCuello,
-            String colaComprimida, String escamasVentralesDesarrolladas, String actividadNocturna,
-
-            // Variables Anguidos
-            String patasReducidasAusentes, String colaMuyFragil, String escamasEnFila,
-            String pliegueLateral, String colaPrensil, String habitatAsiatico,
-            String tamanoPequeno, String cuerpoDelgado, String tamanoGrande, String cuerpoLiso,
-
-            // Variables Ctenosauras
-            String colaEspinosa, String corredoresVeloces, String diurnos,
-            String coloracionOscura, String crestaAlta, String colaLarga,
-            String espinasCortas, String cincoCrestas, String crestaDividida,
-            String escamasGrandes, String dietaCarnivora, String bandaPectoral,
-            String dorsoAmarillo,
-
-            // Variable Caretta
-            String cabezaMuyGrande,
-
-            // Variables Micrurus
-            String anillosTricolor, String anillosNegrosAnchos, String cabezaNegra,
-            String colaCorta, String distribucionCentroamerica, String distribucionSudamerica,
-            String distribucionMexico, String habitatSelva, String habitatBosqueSeco,
-            String habitatAcuario, String anilloBlancoPresente,
-
-            // Variables Abronia
-            String coloracionRojiza, String coloracionVerde, String coloracionEsmeralda,
-            String labiosRojos, String colaOscura, String bandaDorsal,
-            String cabezaAncha, String orejasVisibles, String escamasQuilladas,
-            String ojosGrandes) {
+        // Parámetros Reino
+        String unicelulares, String fotosintesis, String esporas,
+        String ambientesExtremos, String movilidadActiva,
+        // Parámetros Filo
+        String simetriaRadial, String tejidosVerdaderos, String segmentacion,
+        String digestivoCompleto, String notocorda, String conchaCalcarea, String quetas,
+        // Parámetros Clase
+        String sangreFria, String huevoAmniotico, String garrasDedos, String corazonTresCamaras,
+        String pielSecaEscamosa, String mandibulas, String aletasLobuladas,
+        String radiosOseosAletas, String esqueletoOseo,
+        // Parámetros Orden
+        String fecundacionInterna, String caparazonOseo,
+        String mudaPiel, String tercerOjoParietal, String cuidadoParental,
+        // Parámetros Familia
+        String dientesPleurodontes, String lenguaCortaNoBifida, String termorregulador,
+        String escamasEspinosas, String extremidadesReducidas, String ojosParpadosMoviles,
+        String pupilasVerticales, String venenoPotente, String autotomiaCaudal,
+        String habitosArboricolas, String carnivoros, String huevosCascaraCalcarea,
+        String marino, String terrestre, String escudosAusentes,
+        String caparazonAlto, String caparazonAplanado, String cabezaGrandeAlargada,
+        String habitatPrincipalUSA, String habitatPrincipalAustralia,
+        // Parámetros Género
+        String dosPatasTraseras, String ojosReducidos, String adaptadoExcavar,
+        String cuerpoAlargadoCilindrico, String sinPatas, String venenoso,
+        String pielOsteodermos, String lagartosParpadosMoviles, String geckos,
+        String espolonesPelvicos, String escamasVertHilerasTransv, String escamasDorsalesQuilladas,
+        // Parámetros Especie
+        String endemicoMexico, String peninsulaBajaCalifornia, String estadoGuerrero,
+        String estadoMichoacan, String chiapasGuatemala, String hastaCostaRica,
+        String tamanoAdulto24cm, String tamanoAdulto18cm, String colorUniformeOscuro,
+        String coloracionRosadaPalida,
+        // Variables adicionales
+        String herbivoro, String omnivoro, String crestaDorsal, String espinosasCola,
+        String adaptacionDesierto, String endemicoIslas, String peligroExtincion,
+        // Variables Anolis
+        String tieneLamelas, String escamasEspecializadas, String papadaSuperReducida,
+        String capacidadAutotomiaCaudal, String papadaExtensible, String papadaGrande,
+        String porosFemorales, String colorVerdePredominante, String habitatUrbano,
+        String dewlapRojo, String escamasRugosas,
+        // Variables Tortugas
+        String distribucionTropical, String dietaHerbivora, String picoFuerteCrustaceos,
+        String dietaPastosMarinos,
+        // Variables Elápidos
+        String cuerpoCilindrico, String pupilaRedonda, String patronAnillo,
+        String habitatAcuatico, String habitatArboreo, String expandeCuello,
+        String colaComprimida, String escamasVentralesDesarrolladas, String actividadNocturna,
+        // Variables Anguidos
+        String patasReducidasAusentes, String colaMuyFragil, String escamasEnFila,
+        String pliegueLateral, String colaPrensil, String habitatAsiatico,
+        String tamanoPequeno, String cuerpoDelgado, String tamanoGrande, String cuerpoLiso,
+        // Variables Ctenosauras
+        String colaEspinosa, String corredoresVeloces, String diurnos,
+        String coloracionOscura, String crestaAlta, String colaLarga,
+        String espinasCortas, String cincoCrestas, String crestaDividida,
+        String escamasGrandes, String dietaCarnivora, String bandaPectoral,
+        String dorsoAmarillo,
+        // Variable Caretta
+        String cabezaMuyGrande,
+        // Variables Micrurus
+        String anillosTricolor, String anillosNegrosAnchos, String cabezaNegra,
+        String colaCorta, String distribucionCentroamerica, String distribucionSudamerica,
+        String distribucionMexico, String estadoOaxaca, String habitatSelva, String habitatBosqueSeco,
+        String habitatAcuario, String anilloBlancoPresente,
+        // Variables Abronia
+        String coloracionRojiza, String coloracionVerde, String coloracionEsmeralda,
+        String labiosRojos, String colaOscura, String bandaDorsal,
+        String cabezaAncha, String orejasVisibles, String escamasQuilladas,
+        String ojosGrandes) {
 
         inicializarBR();
 
@@ -335,6 +320,7 @@ public class ReptileTaxonomyBR {
         DistribucionCentroamerica.setValue(distribucionCentroamerica);
         DistribucionSudamerica.setValue(distribucionSudamerica);
         DistribucionMexico.setValue(distribucionMexico);
+        EstadoOaxaca.setValue(estadoOaxaca);
         HabitatSelva.setValue(habitatSelva);
         HabitatBosqueSeco.setValue(habitatBosqueSeco);
         HabitatAcuario.setValue(habitatAcuario);
@@ -355,12 +341,12 @@ public class ReptileTaxonomyBR {
         br.forwardChain();
 
         resultadoClasificacion = "Reino: " + Reino.getValue() +
-                                 " | Filo: " + Filo.getValue() +
-                                 " | Clase: " + Clase.getValue() +
-                                 " | Orden: " + Orden.getValue() +
-                                 " | Familia: " + Familia.getValue() +
-                                 " | Género: " + Genero.getValue() +
-                                 " | Especie: " + Especie.getValue();
+            " | Filo: " + Filo.getValue() +
+            " | Clase: " + Clase.getValue() +
+            " | Orden: " + Orden.getValue() +
+            " | Familia: " + Familia.getValue() +
+            " | Género: " + Genero.getValue() +
+            " | Especie: " + Especie.getValue();
 
         return resultadoClasificacion;
     }
@@ -528,6 +514,7 @@ public class ReptileTaxonomyBR {
         DistribucionCentroamerica = new RuleVariable(br, "DistribucionCentroamerica");
         DistribucionSudamerica = new RuleVariable(br, "DistribucionSudamerica");
         DistribucionMexico = new RuleVariable(br, "DistribucionMexico");
+        EstadoOaxaca = new RuleVariable(br, "EstadoOaxaca");
         HabitatSelva = new RuleVariable(br, "HabitatSelva");
         HabitatBosqueSeco = new RuleVariable(br, "HabitatBosqueSeco");
         HabitatAcuario = new RuleVariable(br, "HabitatAcuario");
@@ -548,7 +535,6 @@ public class ReptileTaxonomyBR {
         Condition igual = new Condition("=");
         
         // REGLAS DE CLASIFICACIÓN
-        // REINO (R1-R6)
         Rule r1 = new Rule(br, "R1_Eubacteria",
             new Clause[]{
                 new Clause(Unicelulares, igual, "si"),
@@ -1378,7 +1364,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "si"),
                 new Clause(EspinosasCola, igual, "si"),
                 new Clause(AdaptacionDesierto, igual, "si"),
-                new Clause(Arboricola, igual, "si"),
+                new Clause(HabitosArboricolas, igual, "si"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "no"),
@@ -1393,7 +1379,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "si"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "no"),
-                new Clause(Arboricola, igual, "si"),
+                new Clause(HabitosArboricolas, igual, "si"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "no"),
@@ -1408,7 +1394,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "no"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "si"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "no"),
@@ -1423,7 +1409,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "no"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "si"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "si"),
@@ -1438,7 +1424,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "si"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "no"),
-                new Clause(Arboricola, igual, "si"),
+                new Clause(HabitosArboricolas, igual, "si"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "si"),
@@ -1453,7 +1439,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "si"),
                 new Clause(EspinosasCola, igual, "si"),
                 new Clause(AdaptacionDesierto, igual, "no"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "si"),
@@ -1468,7 +1454,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "si"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "no"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "si"),
                 new Clause(EndemicoIslas, igual, "si"),
@@ -1483,7 +1469,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "si"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "no"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "si"),
@@ -1498,7 +1484,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "no"),
                 new Clause(EspinosasCola, igual, "si"),
                 new Clause(AdaptacionDesierto, igual, "no"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "si"),
@@ -1513,7 +1499,7 @@ public class ReptileTaxonomyBR {
                 new Clause(CrestaDorsal, igual, "no"),
                 new Clause(EspinosasCola, igual, "no"),
                 new Clause(AdaptacionDesierto, igual, "si"),
-                new Clause(Arboricola, igual, "no"),
+                new Clause(HabitosArboricolas, igual, "no"),
                 new Clause(Terrestre, igual, "si"),
                 new Clause(Marino, igual, "no"),
                 new Clause(EndemicoIslas, igual, "no"),

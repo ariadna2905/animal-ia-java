@@ -101,8 +101,9 @@ String v1;
             sv="si";
         else
             sv="no";
-        System.out.println("\nV1=" + v1+"\nCorre=" + sc + "\nVuela=" + sv);        
-        c=objbr.getVertebrado2(v1,sc,sv);
+        System.out.println("\nV1=" + v1+"\nCorre=" + sc + "\nVuela=" + sv);    
+        c=objbr.getEspecie();
+        //c=objbr.getVertebrado2(v1,sc,sv);
         System.out.println("V2=" + c);
         jLabel2.setText(c);
     }//GEN-LAST:event_jButton1ActionPerformed
