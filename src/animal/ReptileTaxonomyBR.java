@@ -5,79 +5,80 @@ import Rule.*;
 
 public class ReptileTaxonomyBR {
 
+    private static final String SI = "si";
+    private static final String NO = "no";
+
     BooleanRuleBase br = new BooleanRuleBase("reptileTaxonomy");
-    
+
     // Variables para todos los niveles taxonómicos
     // REINO
     RuleVariable Unicelulares, Fotosintesis, Esporas, AmbientesExtremos, MovilidadActiva;
     RuleVariable Reino;
-    
+
     // FILO
     RuleVariable SimetriaRadial, TejidosVerdaderos, Segmentacion, DigestivoCompleto;
     RuleVariable Notocorda, ConchaCalcarea, Quetas;
     RuleVariable Filo;
-    
+
     // CLASE
     RuleVariable SangreFria, HuevoAmniotico, GarrasDedos, CorazonTresCamaras;
     RuleVariable PielSecaEscamosa, Mandibulas, AletasLobuladas, RadiosOseosAletas, EsqueletoOseo;
     RuleVariable Clase;
-    
+
     // ORDEN
     RuleVariable FecundacionInterna, CaparazonOseo, MudaPiel, TercerOjoParietal, CuidadoParental;
     RuleVariable Orden;
-    
+
     // FAMILIA
     RuleVariable DientesPleurodontes, LenguaCortaNoBifida, Termorregulador;
     RuleVariable EscamasEspinosas, ExtremidadesReducidas, OjosParpadosMoviles;
     RuleVariable PupilasVerticales, VenenoPotente, AutotomiaCaudal, HabitosArboricolas;
     RuleVariable Carnivoros, HuevosCascaraCalcarea;
-    // VARIABLES PARA TESTUDINES (R40-R49)
     RuleVariable Marino, Terrestre, EscudosAusentes, CaparazonAlto, CaparazonAplanado;
     RuleVariable CabezaGrandeAlargada, HabitatPrincipalUSA, HabitatPrincipalAustralia;
     RuleVariable Familia;
-    
+
     // GÉNERO
     RuleVariable DosPatasTraseras, OjosReducidos, AdaptadoExcavar, CuerpoAlargadoCilindrico;
     RuleVariable SinPatas, Venenoso, PielOsteodermos, LagartosParpadosMoviles, Geckos;
     RuleVariable EspolonesPelvicos, EscamasVertHilerasTransv, EscamasDorsalesQuilladas;
     RuleVariable Genero;
-    
+
     // ESPECIE
     RuleVariable EndemicoMexico, PeninsulaBajaCalifornia, EstadoGuerrero, EstadoMichoacan;
     RuleVariable ChiapasGuatemala, HastaCostaRica, TamanoAdulto24cm, TamanoAdulto18cm;
     RuleVariable ColorUniformeOscuro, ColoracionRosadaPalida;
     RuleVariable Especie;
-    // Variables adicionales necesarias
-    RuleVariable Herbivoro, Omnivoro, CrestaDorsal, EspinosasCola, AdaptacionDesierto, Arboricola, Terrestre, Marino, EndemicoIslas, PeligroExtincion;
-    // Variables para características de iguanidos (R60-R69)
-    RuleVariable Herbivoro, Omnivoro, CrestaDorsal, EspinosasCola, AdaptacionDesierto;
-    RuleVariable Arboricola, EndemicoIslas, PeligroExtincion;
 
-    // Variables para anolis (R70-R79)
+    // Variables adicionales de características
+    RuleVariable Herbivoro, Omnivoro, CrestaDorsal, EspinosasCola, AdaptacionDesierto, EndemicoIslas, PeligroExtincion;
+
+    // Variables para anolis
     RuleVariable TieneLamelas, EscamasEspecializadas, PapadaSuperReducida;
     RuleVariable CapacidadAutotomiaCaudal, PapadaExtensible, PapadaGrande, PorosFemorales;
+    RuleVariable ColorVerdePredominante, HabitatUrbano, DewlapRojo, EscamasRugosas;
 
-    // Variables para tortugas (R80-R84)
+    // Variables para tortugas
     RuleVariable DistribucionTropical, DietaHerbivora, PicoFuerteCrustaceos, DietaPastosMarinos;
 
-    // Variables para elápidos (R85-R94)
+    // Variables para elápidos
     RuleVariable CuerpoCilindrico, PupilaRedonda, PatronAnillo, HabitatAcuatico;
     RuleVariable HabitatArboreo, ExpandeCuello, ColaComprimida, EscamasVentralesDesarrolladas;
     RuleVariable ActividadNocturna;
 
-    // Variables para anguidos (R95-R103)
+    // Variables para anguidos
     RuleVariable PatasReducidasAusentes, ColaMuyFragil, EscamasEnFila, PliegueLateral;
     RuleVariable ColaPrensil, HabitatAsiatico, TamanoPequeno, CuerpoDelgado, TamanoGrande, CuerpoLiso;
 
-    // Variables para ctenosauras (R110-R119)
+    // Variables para ctenosauras
     RuleVariable ColaEspinosa, CorredoresVeloces, Diurnos, ColoracionOscura, CrestaAlta;
     RuleVariable ColaLarga, EspinasCortas, CincoCrestas, CrestaDividida, EscamasGrandes;
     RuleVariable DietaCarnivora, BandaPectoral, DorsoAmarillo;
 
-    // Variable para caretta (R121)
+    // Variable para caretta
     RuleVariable CabezaMuyGrande;
 
-    // Variables para micrurus (R123-R132)
+    // Variables para micrurus
     RuleVariable AnillosTricolor, AnillosNegrosAnchos, CabezaNegra, ColaCorta;
     RuleVariable DistribucionCentroamerica, DistribucionSudamerica, DistribucionMexico;
     RuleVariable HabitatSelva, HabitatBosqueSeco, HabitatAcuario, AnilloBlancoPresente;
@@ -86,61 +87,102 @@ public class ReptileTaxonomyBR {
     RuleVariable ColoracionRojiza, ColoracionVerde, ColoracionEsmeralda, LabiosRojos;
     RuleVariable ColaOscura, BandaDorsal, CabezaAncha, OrejasVisibles, EscamasQuilladas, OjosGrandes;
 
-    // Variables para Anolis
-    RuleVariable ColorVerdePredominante, HabitatUrbano, DewlapRojo, EscamasRugosas;
-
     String resultadoClasificacion;
 
     public String clasificarReptilCompleto(
-        // Parámetros Reino
-        String unicelulares, String fotosintesis, String esporas, 
-        String ambientesExtremos, String movilidadActiva,
-        
-        // Parámetros Filo
-        String simetriaRadial, String tejidosVerdaderos, String segmentacion,
-        String digestivoCompleto, String notocorda, String conchaCalcarea, String quetas,
-        
-        // Parámetros Clase
-        String sangreFria, String huevoAmniotico, String garrasDedos, String corazonTresCamaras,
-        String pielSecaEscamosa, String mandibulas, String aletasLobuladas, 
-        String radiosOseosAletas, String esqueletoOseo,
-        
-        // Parámetros Orden
-        String fecundacionInterna, String huevoAmnioticoOrd, String caparazonOseo, 
-        String mudaPiel, String pielSecaEscamosaOrd, String tercerOjoParietal, String cuidadoParental,
-        
-        // Parámetros Familia
-        String dientesPleurodontes, String lenguaCortaNoBifida, String termorregulador,
-        String escamasEspinosas, String extremidadesReducidas, String ojosParpadosMoviles,
-        String pupilasVerticales, String venenoPotente, String autotomiaCaudal, 
-        String habitosArboricolas, String carnivoros, String huevosCascaraCalcarea,
-        
-        // Parámetros Testudines (R40-R49)
-        String marino, String terrestre, String escudosAusentes, 
-        String caparazonAlto, String caparazonAplanado, String cabezaGrandeAlargada,
-        String habitatPrincipalUSA, String habitatPrincipalAustralia,
-        
-        // Parámetros Género
-        String dosPatasTraseras, String ojosReducidos, String adaptadoExcavar, 
-        String cuerpoAlargadoCilindrico, String sinPatas, String venenoso, 
-        String pielOsteodermos, String lagartosParpadosMoviles, String geckos,
-        String espolonesPelvicos, String escamasVertHilerasTransv, String escamasDorsalesQuilladas,
-        
-        // Parámetros Especie
-        String endemicoMexico, String peninsulaBajaCalifornia, String estadoGuerrero,
-        String estadoMichoacan, String chiapasGuatemala, String hastaCostaRica,
-        String tamanoAdulto24cm, String tamanoAdulto18cm, String colorUniformeOscuro,
-        String coloracionRosadaPalida) {
-        
+            // Parámetros Reino
+            String unicelulares, String fotosintesis, String esporas,
+            String ambientesExtremos, String movilidadActiva,
+
+            // Parámetros Filo
+            String simetriaRadial, String tejidosVerdaderos, String segmentacion,
+            String digestivoCompleto, String notocorda, String conchaCalcarea, String quetas,
+
+            // Parámetros Clase
+            String sangreFria, String huevoAmniotico, String garrasDedos, String corazonTresCamaras,
+            String pielSecaEscamosa, String mandibulas, String aletasLobuladas,
+            String radiosOseosAletas, String esqueletoOseo,
+
+            // Parámetros Orden
+            String fecundacionInterna, String caparazonOseo,
+            String mudaPiel, String tercerOjoParietal, String cuidadoParental,
+
+            // Parámetros Familia
+            String dientesPleurodontes, String lenguaCortaNoBifida, String termorregulador,
+            String escamasEspinosas, String extremidadesReducidas, String ojosParpadosMoviles,
+            String pupilasVerticales, String venenoPotente, String autotomiaCaudal,
+            String habitosArboricolas, String carnivoros, String huevosCascaraCalcarea,
+            String marino, String terrestre, String escudosAusentes,
+            String caparazonAlto, String caparazonAplanado, String cabezaGrandeAlargada,
+            String habitatPrincipalUSA, String habitatPrincipalAustralia,
+
+            // Parámetros Género
+            String dosPatasTraseras, String ojosReducidos, String adaptadoExcavar,
+            String cuerpoAlargadoCilindrico, String sinPatas, String venenoso,
+            String pielOsteodermos, String lagartosParpadosMoviles, String geckos,
+            String espolonesPelvicos, String escamasVertHilerasTransv, String escamasDorsalesQuilladas,
+
+            // Parámetros Especie
+            String endemicoMexico, String peninsulaBajaCalifornia, String estadoGuerrero,
+            String estadoMichoacan, String chiapasGuatemala, String hastaCostaRica,
+            String tamanoAdulto24cm, String tamanoAdulto18cm, String colorUniformeOscuro,
+            String coloracionRosadaPalida,
+
+            // Variables adicionales
+            String herbivoro, String omnivoro, String crestaDorsal, String espinosasCola,
+            String adaptacionDesierto, String endemicoIslas, String peligroExtincion,
+            
+            // Variables Anolis
+            String tieneLamelas, String escamasEspecializadas, String papadaSuperReducida,
+            String capacidadAutotomiaCaudal, String papadaExtensible, String papadaGrande,
+            String porosFemorales, String colorVerdePredominante, String habitatUrbano,
+            String dewlapRojo, String escamasRugosas,
+
+            // Variables Tortugas
+            String distribucionTropical, String dietaHerbivora, String picoFuerteCrustaceos,
+            String dietaPastosMarinos,
+
+            // Variables Elápidos
+            String cuerpoCilindrico, String pupilaRedonda, String patronAnillo,
+            String habitatAcuatico, String habitatArboreo, String expandeCuello,
+            String colaComprimida, String escamasVentralesDesarrolladas, String actividadNocturna,
+
+            // Variables Anguidos
+            String patasReducidasAusentes, String colaMuyFragil, String escamasEnFila,
+            String pliegueLateral, String colaPrensil, String habitatAsiatico,
+            String tamanoPequeno, String cuerpoDelgado, String tamanoGrande, String cuerpoLiso,
+
+            // Variables Ctenosauras
+            String colaEspinosa, String corredoresVeloces, String diurnos,
+            String coloracionOscura, String crestaAlta, String colaLarga,
+            String espinasCortas, String cincoCrestas, String crestaDividida,
+            String escamasGrandes, String dietaCarnivora, String bandaPectoral,
+            String dorsoAmarillo,
+
+            // Variable Caretta
+            String cabezaMuyGrande,
+
+            // Variables Micrurus
+            String anillosTricolor, String anillosNegrosAnchos, String cabezaNegra,
+            String colaCorta, String distribucionCentroamerica, String distribucionSudamerica,
+            String distribucionMexico, String habitatSelva, String habitatBosqueSeco,
+            String habitatAcuario, String anilloBlancoPresente,
+
+            // Variables Abronia
+            String coloracionRojiza, String coloracionVerde, String coloracionEsmeralda,
+            String labiosRojos, String colaOscura, String bandaDorsal,
+            String cabezaAncha, String orejasVisibles, String escamasQuilladas,
+            String ojosGrandes) {
+
         inicializarBR();
-        
+
         // Establecer valores REINO
         Unicelulares.setValue(unicelulares);
         Fotosintesis.setValue(fotosintesis);
         Esporas.setValue(esporas);
         AmbientesExtremos.setValue(ambientesExtremos);
         MovilidadActiva.setValue(movilidadActiva);
-        
+
         // Establecer valores FILO
         SimetriaRadial.setValue(simetriaRadial);
         TejidosVerdaderos.setValue(tejidosVerdaderos);
@@ -149,7 +191,7 @@ public class ReptileTaxonomyBR {
         Notocorda.setValue(notocorda);
         ConchaCalcarea.setValue(conchaCalcarea);
         Quetas.setValue(quetas);
-        
+
         // Establecer valores CLASE
         SangreFria.setValue(sangreFria);
         HuevoAmniotico.setValue(huevoAmniotico);
@@ -160,16 +202,14 @@ public class ReptileTaxonomyBR {
         AletasLobuladas.setValue(aletasLobuladas);
         RadiosOseosAletas.setValue(radiosOseosAletas);
         EsqueletoOseo.setValue(esqueletoOseo);
-        
+
         // Establecer valores ORDEN
         FecundacionInterna.setValue(fecundacionInterna);
-        HuevoAmniotico.setValue(huevoAmnioticoOrd);
         CaparazonOseo.setValue(caparazonOseo);
         MudaPiel.setValue(mudaPiel);
-        PielSecaEscamosa.setValue(pielSecaEscamosaOrd);
         TercerOjoParietal.setValue(tercerOjoParietal);
         CuidadoParental.setValue(cuidadoParental);
-        
+
         // Establecer valores FAMILIA
         DientesPleurodontes.setValue(dientesPleurodontes);
         LenguaCortaNoBifida.setValue(lenguaCortaNoBifida);
@@ -183,8 +223,6 @@ public class ReptileTaxonomyBR {
         HabitosArboricolas.setValue(habitosArboricolas);
         Carnivoros.setValue(carnivoros);
         HuevosCascaraCalcarea.setValue(huevosCascaraCalcarea);
-        
-        // Establecer valores para Testudines (R40-R49)
         Marino.setValue(marino);
         Terrestre.setValue(terrestre);
         EscudosAusentes.setValue(escudosAusentes);
@@ -193,7 +231,7 @@ public class ReptileTaxonomyBR {
         CabezaGrandeAlargada.setValue(cabezaGrandeAlargada);
         HabitatPrincipalUSA.setValue(habitatPrincipalUSA);
         HabitatPrincipalAustralia.setValue(habitatPrincipalAustralia);
-        
+
         // Establecer valores GÉNERO
         DosPatasTraseras.setValue(dosPatasTraseras);
         OjosReducidos.setValue(ojosReducidos);
@@ -207,7 +245,7 @@ public class ReptileTaxonomyBR {
         EspolonesPelvicos.setValue(espolonesPelvicos);
         EscamasVertHilerasTransv.setValue(escamasVertHilerasTransv);
         EscamasDorsalesQuilladas.setValue(escamasDorsalesQuilladas);
-        
+
         // Establecer valores ESPECIE
         EndemicoMexico.setValue(endemicoMexico);
         PeninsulaBajaCalifornia.setValue(peninsulaBajaCalifornia);
@@ -220,15 +258,109 @@ public class ReptileTaxonomyBR {
         ColorUniformeOscuro.setValue(colorUniformeOscuro);
         ColoracionRosadaPalida.setValue(coloracionRosadaPalida);
 
+        // Establecer valores de variables adicionales
+        Herbivoro.setValue(herbivoro);
+        Omnivoro.setValue(omnivoro);
+        CrestaDorsal.setValue(crestaDorsal);
+        EspinosasCola.setValue(espinosasCola);
+        AdaptacionDesierto.setValue(adaptacionDesierto);
+        EndemicoIslas.setValue(endemicoIslas);
+        PeligroExtincion.setValue(peligroExtincion);
+
+        // Establecer valores Anolis
+        TieneLamelas.setValue(tieneLamelas);
+        EscamasEspecializadas.setValue(escamasEspecializadas);
+        PapadaSuperReducida.setValue(papadaSuperReducida);
+        CapacidadAutotomiaCaudal.setValue(capacidadAutotomiaCaudal);
+        PapadaExtensible.setValue(papadaExtensible);
+        PapadaGrande.setValue(papadaGrande);
+        PorosFemorales.setValue(porosFemorales);
+        ColorVerdePredominante.setValue(colorVerdePredominante);
+        HabitatUrbano.setValue(habitatUrbano);
+        DewlapRojo.setValue(dewlapRojo);
+        EscamasRugosas.setValue(escamasRugosas);
+
+        // Establecer valores Tortugas
+        DistribucionTropical.setValue(distribucionTropical);
+        DietaHerbivora.setValue(dietaHerbivora);
+        PicoFuerteCrustaceos.setValue(picoFuerteCrustaceos);
+        DietaPastosMarinos.setValue(dietaPastosMarinos);
+
+        // Establecer valores Elápidos
+        CuerpoCilindrico.setValue(cuerpoCilindrico);
+        PupilaRedonda.setValue(pupilaRedonda);
+        PatronAnillo.setValue(patronAnillo);
+        HabitatAcuatico.setValue(habitatAcuatico);
+        HabitatArboreo.setValue(habitatArboreo);
+        ExpandeCuello.setValue(expandeCuello);
+        ColaComprimida.setValue(colaComprimida);
+        EscamasVentralesDesarrolladas.setValue(escamasVentralesDesarrolladas);
+        ActividadNocturna.setValue(actividadNocturna);
+
+        // Establecer valores Anguidos
+        PatasReducidasAusentes.setValue(patasReducidasAusentes);
+        ColaMuyFragil.setValue(colaMuyFragil);
+        EscamasEnFila.setValue(escamasEnFila);
+        PliegueLateral.setValue(pliegueLateral);
+        ColaPrensil.setValue(colaPrensil);
+        HabitatAsiatico.setValue(habitatAsiatico);
+        TamanoPequeno.setValue(tamanoPequeno);
+        CuerpoDelgado.setValue(cuerpoDelgado);
+        TamanoGrande.setValue(tamanoGrande);
+        CuerpoLiso.setValue(cuerpoLiso);
+
+        // Establecer valores Ctenosauras
+        ColaEspinosa.setValue(colaEspinosa);
+        CorredoresVeloces.setValue(corredoresVeloces);
+        Diurnos.setValue(diurnos);
+        ColoracionOscura.setValue(coloracionOscura);
+        CrestaAlta.setValue(crestaAlta);
+        ColaLarga.setValue(colaLarga);
+        EspinasCortas.setValue(espinasCortas);
+        CincoCrestas.setValue(cincoCrestas);
+        CrestaDividida.setValue(crestaDividida);
+        EscamasGrandes.setValue(escamasGrandes);
+        DietaCarnivora.setValue(dietaCarnivora);
+        BandaPectoral.setValue(bandaPectoral);
+        DorsoAmarillo.setValue(dorsoAmarillo);
+
+        // Establecer valor Caretta
+        CabezaMuyGrande.setValue(cabezaMuyGrande);
+
+        // Establecer valores Micrurus
+        AnillosTricolor.setValue(anillosTricolor);
+        AnillosNegrosAnchos.setValue(anillosNegrosAnchos);
+        CabezaNegra.setValue(cabezaNegra);
+        ColaCorta.setValue(colaCorta);
+        DistribucionCentroamerica.setValue(distribucionCentroamerica);
+        DistribucionSudamerica.setValue(distribucionSudamerica);
+        DistribucionMexico.setValue(distribucionMexico);
+        HabitatSelva.setValue(habitatSelva);
+        HabitatBosqueSeco.setValue(habitatBosqueSeco);
+        HabitatAcuario.setValue(habitatAcuario);
+        AnilloBlancoPresente.setValue(anilloBlancoPresente);
+
+        // Establecer valores Abronia
+        ColoracionRojiza.setValue(coloracionRojiza);
+        ColoracionVerde.setValue(coloracionVerde);
+        ColoracionEsmeralda.setValue(coloracionEsmeralda);
+        LabiosRojos.setValue(labiosRojos);
+        ColaOscura.setValue(colaOscura);
+        BandaDorsal.setValue(bandaDorsal);
+        CabezaAncha.setValue(cabezaAncha);
+        OrejasVisibles.setValue(orejasVisibles);
+        EscamasQuilladas.setValue(escamasQuilladas);
+        OjosGrandes.setValue(ojosGrandes);
+
         br.forwardChain();
-        
-        resultadoClasificacion = "Reino: " + Reino.getValue() + 
-                                " | Filo: " + Filo.getValue() + 
-                                " | Clase: " + Clase.getValue() + 
-                                " | Orden: " + Orden.getValue() + 
-                                " | Familia: " + Familia.getValue() + 
-                                " | Género: " + Genero.getValue() + 
-                                " | Especie: " + Especie.getValue();
+
+        resultadoClasificacion = "Reino: " + Reino.getValue() +
+                                 " | Filo: " + Filo.getValue() +
+                                 " | Clase: " + Clase.getValue() +
+                                 " | Orden: " + Orden.getValue() +
+                                 " | Familia: " + Familia.getValue() +
+                                 " | Género: " + Genero.getValue() +
+                                 " | Especie: " + Especie.getValue();
 
         return resultadoClasificacion;
     }
@@ -242,7 +374,7 @@ public class ReptileTaxonomyBR {
         AmbientesExtremos = new RuleVariable(br, "AmbientesExtremos");
         MovilidadActiva = new RuleVariable(br, "MovilidadActiva");
         Reino = new RuleVariable(br, "Reino");
-        
+
         // FILO
         SimetriaRadial = new RuleVariable(br, "SimetriaRadial");
         TejidosVerdaderos = new RuleVariable(br, "TejidosVerdaderos");
@@ -252,7 +384,7 @@ public class ReptileTaxonomyBR {
         ConchaCalcarea = new RuleVariable(br, "ConchaCalcarea");
         Quetas = new RuleVariable(br, "Quetas");
         Filo = new RuleVariable(br, "Filo");
-        
+
         // CLASE
         SangreFria = new RuleVariable(br, "SangreFria");
         HuevoAmniotico = new RuleVariable(br, "HuevoAmniotico");
@@ -264,7 +396,7 @@ public class ReptileTaxonomyBR {
         RadiosOseosAletas = new RuleVariable(br, "RadiosOseosAletas");
         EsqueletoOseo = new RuleVariable(br, "EsqueletoOseo");
         Clase = new RuleVariable(br, "Clase");
-        
+
         // ORDEN
         FecundacionInterna = new RuleVariable(br, "FecundacionInterna");
         CaparazonOseo = new RuleVariable(br, "CaparazonOseo");
@@ -272,7 +404,7 @@ public class ReptileTaxonomyBR {
         TercerOjoParietal = new RuleVariable(br, "TercerOjoParietal");
         CuidadoParental = new RuleVariable(br, "CuidadoParental");
         Orden = new RuleVariable(br, "Orden");
-        
+
         // FAMILIA
         DientesPleurodontes = new RuleVariable(br, "DientesPleurodontes");
         LenguaCortaNoBifida = new RuleVariable(br, "LenguaCortaNoBifida");
@@ -287,8 +419,8 @@ public class ReptileTaxonomyBR {
         Carnivoros = new RuleVariable(br, "Carnivoros");
         HuevosCascaraCalcarea = new RuleVariable(br, "HuevosCascaraCalcarea");
         Familia = new RuleVariable(br, "Familia");
-        
-        // Variables para Testudines (R40-R49)
+
+        // Variables para Testudines
         Marino = new RuleVariable(br, "Marino");
         Terrestre = new RuleVariable(br, "Terrestre");
         EscudosAusentes = new RuleVariable(br, "EscudosAusentes");
@@ -297,7 +429,7 @@ public class ReptileTaxonomyBR {
         CabezaGrandeAlargada = new RuleVariable(br, "CabezaGrandeAlargada");
         HabitatPrincipalUSA = new RuleVariable(br, "HabitatPrincipalUSA");
         HabitatPrincipalAustralia = new RuleVariable(br, "HabitatPrincipalAustralia");
-        
+
         // GÉNERO
         DosPatasTraseras = new RuleVariable(br, "DosPatasTraseras");
         OjosReducidos = new RuleVariable(br, "OjosReducidos");
@@ -312,7 +444,7 @@ public class ReptileTaxonomyBR {
         EscamasVertHilerasTransv = new RuleVariable(br, "EscamasVertHilerasTransv");
         EscamasDorsalesQuilladas = new RuleVariable(br, "EscamasDorsalesQuilladas");
         Genero = new RuleVariable(br, "Genero");
-        
+
         // ESPECIE
         EndemicoMexico = new RuleVariable(br, "EndemicoMexico");
         PeninsulaBajaCalifornia = new RuleVariable(br, "PeninsulaBajaCalifornia");
@@ -326,7 +458,81 @@ public class ReptileTaxonomyBR {
         ColoracionRosadaPalida = new RuleVariable(br, "ColoracionRosadaPalida");
         Especie = new RuleVariable(br, "Especie");
 
-        // Variables para Abronia
+        // Variables adicionales y de taxonomía específica
+        Herbivoro = new RuleVariable(br, "Herbivoro");
+        Omnivoro = new RuleVariable(br, "Omnivoro");
+        CrestaDorsal = new RuleVariable(br, "CrestaDorsal");
+        EspinosasCola = new RuleVariable(br, "EspinosasCola");
+        AdaptacionDesierto = new RuleVariable(br, "AdaptacionDesierto");
+        EndemicoIslas = new RuleVariable(br, "EndemicoIslas");
+        PeligroExtincion = new RuleVariable(br, "PeligroExtincion");
+        
+        TieneLamelas = new RuleVariable(br, "TieneLamelas");
+        EscamasEspecializadas = new RuleVariable(br, "EscamasEspecializadas");
+        PapadaSuperReducida = new RuleVariable(br, "PapadaSuperReducida");
+        CapacidadAutotomiaCaudal = new RuleVariable(br, "CapacidadAutotomiaCaudal");
+        PapadaExtensible = new RuleVariable(br, "PapadaExtensible");
+        PapadaGrande = new RuleVariable(br, "PapadaGrande");
+        PorosFemorales = new RuleVariable(br, "PorosFemorales");
+        ColorVerdePredominante = new RuleVariable(br, "ColorVerdePredominante");
+        HabitatUrbano = new RuleVariable(br, "HabitatUrbano");
+        DewlapRojo = new RuleVariable(br, "DewlapRojo");
+        EscamasRugosas = new RuleVariable(br, "EscamasRugosas");
+
+        DistribucionTropical = new RuleVariable(br, "DistribucionTropical");
+        DietaHerbivora = new RuleVariable(br, "DietaHerbivora");
+        PicoFuerteCrustaceos = new RuleVariable(br, "PicoFuerteCrustaceos");
+        DietaPastosMarinos = new RuleVariable(br, "DietaPastosMarinos");
+
+        CuerpoCilindrico = new RuleVariable(br, "CuerpoCilindrico");
+        PupilaRedonda = new RuleVariable(br, "PupilaRedonda");
+        PatronAnillo = new RuleVariable(br, "PatronAnillo");
+        HabitatAcuatico = new RuleVariable(br, "HabitatAcuatico");
+        HabitatArboreo = new RuleVariable(br, "HabitatArboreo");
+        ExpandeCuello = new RuleVariable(br, "ExpandeCuello");
+        ColaComprimida = new RuleVariable(br, "ColaComprimida");
+        EscamasVentralesDesarrolladas = new RuleVariable(br, "EscamasVentralesDesarrolladas");
+        ActividadNocturna = new RuleVariable(br, "ActividadNocturna");
+
+        PatasReducidasAusentes = new RuleVariable(br, "PatasReducidasAusentes");
+        ColaMuyFragil = new RuleVariable(br, "ColaMuyFragil");
+        EscamasEnFila = new RuleVariable(br, "EscamasEnFila");
+        PliegueLateral = new RuleVariable(br, "PliegueLateral");
+        ColaPrensil = new RuleVariable(br, "ColaPrensil");
+        HabitatAsiatico = new RuleVariable(br, "HabitatAsiatico");
+        TamanoPequeno = new RuleVariable(br, "TamanoPequeno");
+        CuerpoDelgado = new RuleVariable(br, "CuerpoDelgado");
+        TamanoGrande = new RuleVariable(br, "TamanoGrande");
+        CuerpoLiso = new RuleVariable(br, "CuerpoLiso");
+
+        ColaEspinosa = new RuleVariable(br, "ColaEspinosa");
+        CorredoresVeloces = new RuleVariable(br, "CorredoresVeloces");
+        Diurnos = new RuleVariable(br, "Diurnos");
+        ColoracionOscura = new RuleVariable(br, "ColoracionOscura");
+        CrestaAlta = new RuleVariable(br, "CrestaAlta");
+        ColaLarga = new RuleVariable(br, "ColaLarga");
+        EspinasCortas = new RuleVariable(br, "EspinasCortas");
+        CincoCrestas = new RuleVariable(br, "CincoCrestas");
+        CrestaDividida = new RuleVariable(br, "CrestaDividida");
+        EscamasGrandes = new RuleVariable(br, "EscamasGrandes");
+        DietaCarnivora = new RuleVariable(br, "DietaCarnivora");
+        BandaPectoral = new RuleVariable(br, "BandaPectoral");
+        DorsoAmarillo = new RuleVariable(br, "DorsoAmarillo");
+
+        CabezaMuyGrande = new RuleVariable(br, "CabezaMuyGrande");
+
+        AnillosTricolor = new RuleVariable(br, "AnillosTricolor");
+        AnillosNegrosAnchos = new RuleVariable(br, "AnillosNegrosAnchos");
+        CabezaNegra = new RuleVariable(br, "CabezaNegra");
+        ColaCorta = new RuleVariable(br, "ColaCorta");
+        DistribucionCentroamerica = new RuleVariable(br, "DistribucionCentroamerica");
+        DistribucionSudamerica = new RuleVariable(br, "DistribucionSudamerica");
+        DistribucionMexico = new RuleVariable(br, "DistribucionMexico");
+        HabitatSelva = new RuleVariable(br, "HabitatSelva");
+        HabitatBosqueSeco = new RuleVariable(br, "HabitatBosqueSeco");
+        HabitatAcuario = new RuleVariable(br, "HabitatAcuario");
+        AnilloBlancoPresente = new RuleVariable(br, "AnilloBlancoPresente");
+
         ColoracionRojiza = new RuleVariable(br, "ColoracionRojiza");
         ColoracionVerde = new RuleVariable(br, "ColoracionVerde");
         ColoracionEsmeralda = new RuleVariable(br, "ColoracionEsmeralda");
@@ -338,17 +544,9 @@ public class ReptileTaxonomyBR {
         EscamasQuilladas = new RuleVariable(br, "EscamasQuilladas");
         OjosGrandes = new RuleVariable(br, "OjosGrandes");
 
-        // Variables para Anolis
-        ColorVerdePredominante = new RuleVariable(br, "ColorVerdePredominante");
-        CrestaDorsal = new RuleVariable(br, "CrestaDorsal");
-        TamanoGrande = new RuleVariable(br, "TamanoGrande");
-        HabitatUrbano = new RuleVariable(br, "HabitatUrbano");
-        DewlapRojo = new RuleVariable(br, "DewlapRojo");
-        EscamasRugosas = new RuleVariable(br, "EscamasRugosas");
-
         // Definición de operadores lógicos
         Condition igual = new Condition("=");
-
+        
         // REGLAS DE CLASIFICACIÓN
         // REINO (R1-R6)
         Rule r1 = new Rule(br, "R1_Eubacteria",
