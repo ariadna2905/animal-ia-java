@@ -47,7 +47,48 @@ public class ReptileTaxonomyBR {
     RuleVariable ChiapasGuatemala, HastaCostaRica, TamanoAdulto24cm, TamanoAdulto18cm;
     RuleVariable ColorUniformeOscuro, ColoracionRosadaPalida;
     RuleVariable Especie;
-    
+    // Variables adicionales necesarias
+    RuleVariable Herbivoro, Omnivoro, CrestaDorsal, EspinosasCola, AdaptacionDesierto, Arboricola, Terrestre, Marino, EndemicoIslas, PeligroExtincion;
+    // Variables para características de iguanidos (R60-R69)
+    RuleVariable Herbivoro, Omnivoro, CrestaDorsal, EspinosasCola, AdaptacionDesierto;
+    RuleVariable Arboricola, EndemicoIslas, PeligroExtincion;
+
+    // Variables para anolis (R70-R79)
+    RuleVariable TieneLamelas, EscamasEspecializadas, PapadaSuperReducida;
+    RuleVariable CapacidadAutotomiaCaudal, PapadaExtensible, PapadaGrande, PorosFemorales;
+
+    // Variables para tortugas (R80-R84)
+    RuleVariable DistribucionTropical, DietaHerbivora, PicoFuerteCrustaceos, DietaPastosMarinos;
+
+    // Variables para elápidos (R85-R94)
+    RuleVariable CuerpoCilindrico, PupilaRedonda, PatronAnillo, HabitatAcuatico;
+    RuleVariable HabitatArboreo, ExpandeCuello, ColaComprimida, EscamasVentralesDesarrolladas;
+    RuleVariable ActividadNocturna;
+
+    // Variables para anguidos (R95-R103)
+    RuleVariable PatasReducidasAusentes, ColaMuyFragil, EscamasEnFila, PliegueLateral;
+    RuleVariable ColaPrensil, HabitatAsiatico, TamanoPequeno, CuerpoDelgado, TamanoGrande, CuerpoLiso;
+
+    // Variables para ctenosauras (R110-R119)
+    RuleVariable ColaEspinosa, CorredoresVeloces, Diurnos, ColoracionOscura, CrestaAlta;
+    RuleVariable ColaLarga, EspinasCortas, CincoCrestas, CrestaDividida, EscamasGrandes;
+    RuleVariable DietaCarnivora, BandaPectoral, DorsoAmarillo;
+
+    // Variable para caretta (R121)
+    RuleVariable CabezaMuyGrande;
+
+    // Variables para micrurus (R123-R132)
+    RuleVariable AnillosTricolor, AnillosNegrosAnchos, CabezaNegra, ColaCorta;
+    RuleVariable DistribucionCentroamerica, DistribucionSudamerica, DistribucionMexico;
+    RuleVariable HabitatSelva, HabitatBosqueSeco, HabitatAcuario, AnilloBlancoPresente;
+
+    // Variables para Abronia
+    RuleVariable ColoracionRojiza, ColoracionVerde, ColoracionEsmeralda, LabiosRojos;
+    RuleVariable ColaOscura, BandaDorsal, CabezaAncha, OrejasVisibles, EscamasQuilladas, OjosGrandes;
+
+    // Variables para Anolis
+    RuleVariable ColorVerdePredominante, HabitatUrbano, DewlapRojo, EscamasRugosas;
+
     String resultadoClasificacion;
 
     public String clasificarReptilCompleto(
@@ -285,6 +326,26 @@ public class ReptileTaxonomyBR {
         ColoracionRosadaPalida = new RuleVariable(br, "ColoracionRosadaPalida");
         Especie = new RuleVariable(br, "Especie");
 
+        // Variables para Abronia
+        ColoracionRojiza = new RuleVariable(br, "ColoracionRojiza");
+        ColoracionVerde = new RuleVariable(br, "ColoracionVerde");
+        ColoracionEsmeralda = new RuleVariable(br, "ColoracionEsmeralda");
+        LabiosRojos = new RuleVariable(br, "LabiosRojos");
+        ColaOscura = new RuleVariable(br, "ColaOscura");
+        BandaDorsal = new RuleVariable(br, "BandaDorsal");
+        CabezaAncha = new RuleVariable(br, "CabezaAncha");
+        OrejasVisibles = new RuleVariable(br, "OrejasVisibles");
+        EscamasQuilladas = new RuleVariable(br, "EscamasQuilladas");
+        OjosGrandes = new RuleVariable(br, "OjosGrandes");
+
+        // Variables para Anolis
+        ColorVerdePredominante = new RuleVariable(br, "ColorVerdePredominante");
+        CrestaDorsal = new RuleVariable(br, "CrestaDorsal");
+        TamanoGrande = new RuleVariable(br, "TamanoGrande");
+        HabitatUrbano = new RuleVariable(br, "HabitatUrbano");
+        DewlapRojo = new RuleVariable(br, "DewlapRojo");
+        EscamasRugosas = new RuleVariable(br, "EscamasRugosas");
+
         // Definición de operadores lógicos
         Condition igual = new Condition("=");
 
@@ -453,7 +514,6 @@ public class ReptileTaxonomyBR {
                 new Clause(Quetas, igual, "no")
             }, new Clause(Filo, igual, "Porifera"));
 
-        // Reglas CLASE (R16-R18, R20-R25)
         Rule r16 = new Rule(br, "R16_Agnatha",
             new Clause[]{
                 new Clause(Filo, igual, "Chordata"),
@@ -496,7 +556,6 @@ public class ReptileTaxonomyBR {
                 new Clause(EsqueletoOseo, igual, "si")
             }, new Clause(Clase, igual, "Osteichthyes"));
             
-        // CLASE Reptilia (R16-R25)
         Rule r19 = new Rule(br, "R19_Reptilia",
             new Clause[]{
                 new Clause(Filo, igual, "Chordata"),
@@ -511,7 +570,7 @@ public class ReptileTaxonomyBR {
                 new Clause(EsqueletoOseo, igual, "si")
             }, new Clause(Clase, igual, "Reptilia"));
 
-            Rule r20 = new Rule(br, "R20_Amphibia",
+        Rule r20 = new Rule(br, "R20_Amphibia",
             new Clause[]{
                 new Clause(Filo, igual, "Chordata"),
                 new Clause(SangreFria, igual, "si"),
@@ -595,7 +654,6 @@ public class ReptileTaxonomyBR {
                 new Clause(EsqueletoOseo, igual, "si")
             }, new Clause(Clase, igual, "Cephalaspidomorphi"));
             
-        // ORDEN Squamata (R26-R29)
         Rule r26 = new Rule(br, "R26_Squamata",
             new Clause[]{
                 new Clause(Clase, igual, "Reptilia"),
@@ -644,7 +702,6 @@ public class ReptileTaxonomyBR {
                 new Clause(CuidadoParental, igual, "no")
             }, new Clause(Orden, igual, "Testudines"));
 
-        // Reglas FAMILIA (R30-R33, R35-R39)
         Rule r30 = new Rule(br, "R30_Elapidae",
             new Clause[]{
                 new Clause(Orden, igual, "Squamata"),
@@ -713,7 +770,6 @@ public class ReptileTaxonomyBR {
                 new Clause(HuevosCascaraCalcarea, igual, "si")
             }, new Clause(Familia, igual, "Anguidae"));
 
-        // FAMILIA Amphisbaenidae (R30-R39)
         Rule r34 = new Rule(br, "R34_Amphisbaenidae",
             new Clause[]{
                 new Clause(Orden, igual, "Squamata"),
@@ -1099,7 +1155,6 @@ public class ReptileTaxonomyBR {
                 new Clause(EscamasDorsalesQuilladas, igual, "si")
             }, new Clause(Genero, igual, "Tropiduridae"));
 
-        // GÉNERO Bipes (R50-R59)
         Rule r59 = new Rule(br, "R59_Bipes",
             new Clause[]{
                 new Clause(Familia, igual, "Amphisbaenidae"),
@@ -1117,7 +1172,626 @@ public class ReptileTaxonomyBR {
                 new Clause(EscamasDorsalesQuilladas, igual, "no")
             }, new Clause(Genero, igual, "Bipes"));
 
-        // ESPECIE Bipes biporus (R104-R108)
+        Rule r60 = new Rule(br, "R60_Ctenosaura",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "si"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(EspinosasCola, igual, "si"),
+                new Clause(AdaptacionDesierto, igual, "si"),
+                new Clause(Arboricola, igual, "si"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "no"),
+                new Clause(PeligroExtincion, igual, "no")
+            }, new Clause(Genero, igual, "Ctenosaura"));
+
+        Rule r61 = new Rule(br, "R61_Iguana",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "no"),
+                new Clause(Arboricola, igual, "si"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "no"),
+                new Clause(PeligroExtincion, igual, "no")
+            }, new Clause(Genero, igual, "Iguana"));
+
+        Rule r62 = new Rule(br, "R62_Dipsosaurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "si"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "no"),
+                new Clause(PeligroExtincion, igual, "no")
+            }, new Clause(Genero, igual, "Dipsosaurus"));
+
+        Rule r63 = new Rule(br, "R63_Sauromalus",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "si"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "si"),
+                new Clause(PeligroExtincion, igual, "no")
+            }, new Clause(Genero, igual, "Sauromalus"));
+
+        Rule r64 = new Rule(br, "R64_Brachylophus",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "no"),
+                new Clause(Arboricola, igual, "si"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "si"),
+                new Clause(PeligroExtincion, igual, "si")
+            }, new Clause(Genero, igual, "Brachylophus"));
+
+        Rule r65 = new Rule(br, "R65_Cyclura",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(EspinosasCola, igual, "si"),
+                new Clause(AdaptacionDesierto, igual, "no"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "si"),
+                new Clause(PeligroExtincion, igual, "si")
+            }, new Clause(Genero, igual, "Cyclura"));
+
+        Rule r66 = new Rule(br, "R66_Amblyrhynchus",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "no"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "si"),
+                new Clause(EndemicoIslas, igual, "si"),
+                new Clause(PeligroExtincion, igual, "si")
+            }, new Clause(Genero, igual, "Amblyrhynchus"));
+
+        Rule r67 = new Rule(br, "R67_Conolophus",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "si"),
+                new Clause(Omnivoro, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "no"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "si"),
+                new Clause(PeligroExtincion, igual, "si")
+            }, new Clause(Genero, igual, "Conolophus"));
+
+        Rule r68 = new Rule(br, "R68_Oplurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "no"),
+                new Clause(Omnivoro, igual, "si"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(EspinosasCola, igual, "si"),
+                new Clause(AdaptacionDesierto, igual, "no"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "si"),
+                new Clause(PeligroExtincion, igual, "no")
+            }, new Clause(Genero, igual, "Oplurus"));
+
+        Rule r69 = new Rule(br, "R69_Phrynosoma",
+            new Clause[]{
+                new Clause(Familia, igual, "Iguanidae"),
+                new Clause(Herbivoro, igual, "no"),
+                new Clause(Omnivoro, igual, "si"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(EspinosasCola, igual, "no"),
+                new Clause(AdaptacionDesierto, igual, "si"),
+                new Clause(Arboricola, igual, "no"),
+                new Clause(Terrestre, igual, "si"),
+                new Clause(Marino, igual, "no"),
+                new Clause(EndemicoIslas, igual, "no"),
+                new Clause(PeligroExtincion, igual, "no")
+            }, new Clause(Genero, igual, "Phrynosoma"));
+
+        Rule r70 = new Rule(br, "R70_Anolis",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "si"),
+                new Clause(LenguaCortaNoBifida, igual, "si"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "si"),
+                new Clause(PapadaExtensible, igual, "si"),
+                new Clause(PapadaGrande, igual, "si"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Anolis"));
+
+        Rule r71 = new Rule(br, "R71_Norops",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "si"),
+                new Clause(LenguaCortaNoBifida, igual, "no"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Norops"));
+
+        Rule r72 = new Rule(br, "R72_Ctenonotus",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "si"),
+                new Clause(LenguaCortaNoBifida, igual, "si"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Ctenonotus"));
+
+        Rule r73 = new Rule(br, "R73_Deyroptyx",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "no"),
+                new Clause(LenguaCortaNoBifida, igual, "si"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Deyroptyx"));
+
+        Rule r74 = new Rule(br, "R74_Dactyloa",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "si"),
+                new Clause(LenguaCortaNoBifida, igual, "no"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "si"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Dactyloa"));
+
+        Rule r75 = new Rule(br, "R75_Chamaelinorops",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "no"),
+                new Clause(LenguaCortaNoBifida, igual, "si"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "si"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Chamaelinorops"));
+
+        Rule r76 = new Rule(br, "R76_Xiphosurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "si"),
+                new Clause(LenguaCortaNoBifida, igual, "no"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Xiphosurus"));
+
+        Rule r77 = new Rule(br, "R77_Audantia",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "no"),
+                new Clause(LenguaCortaNoBifida, igual, "si"),
+                new Clause(EscamasEspecializadas, igual, "si"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Audantia"));
+
+        Rule r78 = new Rule(br, "R78_Divinatus",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "si"),
+                new Clause(LenguaCortaNoBifida, igual, "no"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "si"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Divinatus"));
+
+        Rule r79 = new Rule(br, "R79_Phenacosaurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Dactyloidae"),
+                new Clause(TieneLamelas, igual, "no"),
+                new Clause(LenguaCortaNoBifida, igual, "si"),
+                new Clause(EscamasEspecializadas, igual, "no"),
+                new Clause(PapadaSuperReducida, igual, "si"),
+                new Clause(CapacidadAutotomiaCaudal, igual, "no"),
+                new Clause(PapadaExtensible, igual, "no"),
+                new Clause(PapadaGrande, igual, "no"),
+                new Clause(PorosFemorales, igual, "no")
+            }, new Clause(Genero, igual, "Phenacosaurus"));
+        Rule r80 = new Rule(br, "R80_Eretmochelys",
+            new Clause[]{
+                new Clause(Familia, igual, "Cheloniidae"),
+                new Clause(DistribucionTropical, igual, "si"),
+                new Clause(DietaHerbivora, igual, "no"),
+                new Clause(PicoFuerteCrustaceos, igual, "no"),
+                new Clause(CaparazonAplanado, igual, "no"),
+                new Clause(DietaPastosMarinos, igual, "no")
+            }, new Clause(Genero, igual, "Eretmochelys"));
+
+        Rule r81 = new Rule(br, "R81_Chelonia",
+            new Clause[]{
+                new Clause(Familia, igual, "Cheloniidae"),
+                new Clause(DistribucionTropical, igual, "no"),
+                new Clause(DietaHerbivora, igual, "si"),
+                new Clause(PicoFuerteCrustaceos, igual, "no"),
+                new Clause(CaparazonAplanado, igual, "no"),
+                new Clause(DietaPastosMarinos, igual, "no")
+            }, new Clause(Genero, igual, "Chelonia"));
+
+        Rule r82 = new Rule(br, "R82_Caretta",
+            new Clause[]{
+                new Clause(Familia, igual, "Cheloniidae"),
+                new Clause(DistribucionTropical, igual, "no"),
+                new Clause(DietaHerbivora, igual, "no"),
+                new Clause(PicoFuerteCrustaceos, igual, "si"),
+                new Clause(CaparazonAplanado, igual, "no"),
+                new Clause(DietaPastosMarinos, igual, "no")
+            }, new Clause(Genero, igual, "Caretta"));
+
+        Rule r83 = new Rule(br, "R83_Lepidochelys",
+            new Clause[]{
+                new Clause(Familia, igual, "Cheloniidae"),
+                new Clause(DistribucionTropical, igual, "si"),
+                new Clause(DietaHerbivora, igual, "no"),
+                new Clause(PicoFuerteCrustaceos, igual, "no"),
+                new Clause(CaparazonAplanado, igual, "si"),
+                new Clause(DietaPastosMarinos, igual, "no")
+            }, new Clause(Genero, igual, "Lepidochelys"));
+
+        Rule r84 = new Rule(br, "R84_Natator",
+            new Clause[]{
+                new Clause(Familia, igual, "Cheloniidae"),
+                new Clause(DistribucionTropical, igual, "no"),
+                new Clause(DietaHerbivora, igual, "no"),
+                new Clause(PicoFuerteCrustaceos, igual, "no"),
+                new Clause(CaparazonAplanado, igual, "no"),
+                new Clause(DietaPastosMarinos, igual, "si")
+            }, new Clause(Genero, igual, "Natator"));
+        Rule r85 = new Rule(br, "R85_Acanthophis",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "no"),
+                new Clause(PupilaRedonda, igual, "no"),
+                new Clause(PatronAnillo, igual, "no"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "si"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Acanthophis"));
+
+        Rule r86 = new Rule(br, "R86_Pseudechis",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "no"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Pseudechis"));
+
+        Rule r87 = new Rule(br, "R87_Notechis",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "si"),
+                new Clause(HabitatAcuatico, igual, "si"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Notechis"));
+
+        Rule r88 = new Rule(br, "R88_Laticauda",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "si"),
+                new Clause(HabitatAcuatico, igual, "si"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "si"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Laticauda"));
+
+        Rule r89 = new Rule(br, "R89_Hydrophis",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "si"),
+                new Clause(HabitatAcuatico, igual, "si"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "si"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "no"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Hydrophis"));
+
+        Rule r90 = new Rule(br, "R90_Bungarus",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "si"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "si")
+            }, new Clause(Genero, igual, "Bungarus"));
+
+        Rule r91 = new Rule(br, "R91_Naja",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "no"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "si"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Naja"));
+
+        Rule r92 = new Rule(br, "R92_Micrurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "si"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "no"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Micrurus"));
+
+        Rule r93 = new Rule(br, "R93_Ophiophagus",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "no"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ExpandeCuello, igual, "si"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Ophiophagus"));
+
+        Rule r94 = new Rule(br, "R94_Dendroaspis",
+            new Clause[]{
+                new Clause(Familia, igual, "Elapidae"),
+                new Clause(CuerpoCilindrico, igual, "si"),
+                new Clause(PupilaRedonda, igual, "si"),
+                new Clause(PatronAnillo, igual, "no"),
+                new Clause(HabitatAcuatico, igual, "no"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ExpandeCuello, igual, "no"),
+                new Clause(ColaComprimida, igual, "no"),
+                new Clause(EscamasVentralesDesarrolladas, igual, "si"),
+                new Clause(ActividadNocturna, igual, "no")
+            }, new Clause(Genero, igual, "Dendroaspis"));
+
+        Rule r95 = new Rule(br, "R95_Elgaria",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "si"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "no"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Elgaria"));
+
+        Rule r96 = new Rule(br, "R96_Gerrhonotus",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "si"),
+                new Clause(SinPatas, igual, "no"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Gerrhonotus"));
+
+        Rule r97 = new Rule(br, "R97_Ophisaurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "si"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Ophisaurus"));
+
+        Rule r98 = new Rule(br, "R98_Anguis",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "si"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "si")
+            }, new Clause(Genero, igual, "Anguis"));
+
+        Rule r99 = new Rule(br, "R99_Abronia",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "no"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Abronia"));
+
+        Rule r100 = new Rule(br, "R100_Dopasia",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "si"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "si"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Dopasia"));
+        Rule r101 = new Rule(br, "R101_Mesaspis",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "no"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "si"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Mesaspis"));
+
+        Rule r102 = new Rule(br, "R102_Hyalosaurus",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "si"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "si"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Hyalosaurus"));
+
+        Rule r103 = new Rule(br, "R103_Pseudopus",
+            new Clause[]{
+                new Clause(Familia, igual, "Anguidae"),
+                new Clause(PatasReducidasAusentes, igual, "si"),
+                new Clause(CuerpoAlargadoCilindrico, igual, "si"),
+                new Clause(ColaMuyFragil, igual, "si"),
+                new Clause(EscamasEnFila, igual, "no"),
+                new Clause(PliegueLateral, igual, "no"),
+                new Clause(SinPatas, igual, "si"),
+                new Clause(ColaPrensil, igual, "no"),
+                new Clause(HabitatAsiatico, igual, "no"),
+                new Clause(TamanoPequeno, igual, "no"),
+                new Clause(CuerpoDelgado, igual, "no"),
+                new Clause(TamanoGrande, igual, "si"),
+                new Clause(CuerpoLiso, igual, "no")
+            }, new Clause(Genero, igual, "Pseudopus"));
+            
         Rule r104 = new Rule(br, "R104_Bipes_biporus",
             new Clause[]{
                 new Clause(Genero, igual, "Bipes"),
@@ -1192,5 +1866,660 @@ public class ReptileTaxonomyBR {
                 new Clause(ColorUniformeOscuro, igual, "si"),
                 new Clause(ColoracionRosadaPalida, igual, "no")
             }, new Clause(Especie, igual, "Bipes fuliginosus"));
-            }
+
+        Rule r109 = new Rule(br, "R109_LagartoTopoMexicano",
+            new Clause[]{
+                new Clause(Especie, igual, "Bipes biporus")
+            }, new Clause(Especie, igual, "Lagarto Topo Mexicano"));
+
+        Rule r110 = new Rule(br, "R110_Ctenosaura_defensor",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "si"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura defensor"));
+
+        Rule r111 = new Rule(br, "R111_Ctenosaura_pectinata",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "si"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura pectinata"));
+
+        Rule r112 = new Rule(br, "R112_Ctenosaura_similis",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "si"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura similis"));
+
+        Rule r113 = new Rule(br, "R113_Ctenosaura_acanthura",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "si"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "si"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura acanthura"));
+
+        Rule r114 = new Rule(br, "R114_Ctenosaura_quinquecarintata",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "si"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura quinquecarintata"));
+
+        Rule r115 = new Rule(br, "R115_Ctenosaura_hemilopha",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "si"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura hemilopha"));
+
+        Rule r116 = new Rule(br, "R116_Ctenosaura_oaxacana",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura oaxacana"));
+
+        Rule r117 = new Rule(br, "R117_Ctenosaura_bakeri",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "si"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura bakeri"));
+
+        Rule r118 = new Rule(br, "R118_Ctenosaura_melanosterna",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "si"),
+                new Clause(DorsoAmarillo, igual, "no")
+            }, new Clause(Especie, igual, "Ctenosaura melanosterna"));
+
+        Rule r119 = new Rule(br, "R119_Ctenosaura_flavidorsalis",
+            new Clause[]{
+                new Clause(Genero, igual, "Ctenosaura"),
+                new Clause(ColaEspinosa, igual, "si"),
+                new Clause(CorredoresVeloces, igual, "si"),
+                new Clause(Diurnos, igual, "si"),
+                new Clause(ColoracionOscura, igual, "no"),
+                new Clause(CrestaAlta, igual, "no"),
+                new Clause(ColaLarga, igual, "no"),
+                new Clause(EspinasCortas, igual, "no"),
+                new Clause(CincoCrestas, igual, "no"),
+                new Clause(CrestaDividida, igual, "no"),
+                new Clause(EscamasGrandes, igual, "no"),
+                new Clause(DietaCarnivora, igual, "no"),
+                new Clause(BandaPectoral, igual, "no"),
+                new Clause(DorsoAmarillo, igual, "si")
+            }, new Clause(Especie, igual, "Ctenosaura flavidorsalis"));
+
+        Rule r120 = new Rule(br, "R120_IguanaYucateca",
+            new Clause[]{
+                new Clause(Especie, igual, "Ctenosaura defensor")
+            }, new Clause(Especie, igual, "Iguana Yucateca de Cola Espinosa"));
+
+        Rule r121 = new Rule(br, "R121_Caretta_caretta",
+            new Clause[]{
+                new Clause(Genero, igual, "Caretta"),
+                new Clause(CabezaMuyGrande, igual, "si")
+            }, new Clause(Especie, igual, "Caretta caretta"));
+
+        Rule r122 = new Rule(br, "R122_TortugaCaguama",
+            new Clause[]{
+                new Clause(Especie, igual, "Caretta caretta")
+            }, new Clause(Especie, igual, "Tortuga caguama"));
+
+        Rule r123 = new Rule(br, "R123_Micrurus_mipartitus",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "no"),
+                new Clause(CabezaNegra, igual, "no"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "si"),
+                new Clause(DistribucionSudamerica, igual, "si"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "si"),
+                new Clause(HabitatBosqueSeco, igual, "no"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "no")
+            }, new Clause(Especie, igual, "Micrurus mipartitus"));
+
+        Rule r124 = new Rule(br, "R124_Micrurus_tener",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "si"),
+                new Clause(CabezaNegra, igual, "si"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "no"),
+                new Clause(DistribucionMexico, igual, "si"),
+                new Clause(HabitatSelva, igual, "no"),
+                new Clause(HabitatBosqueSeco, igual, "si"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus tener"));
+
+        Rule r125 = new Rule(br, "R125_Micrurus_fulvius",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "si"),
+                new Clause(CabezaNegra, igual, "no"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "no"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "si"),
+                new Clause(HabitatBosqueSeco, igual, "no"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus fulvius"));
+
+        Rule r126 = new Rule(br, "R126_Micrurus_laticollaris",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "si"),
+                new Clause(CabezaNegra, igual, "si"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "no"),
+                new Clause(DistribucionMexico, igual, "si"),
+                new Clause(HabitatSelva, igual, "no"),
+                new Clause(HabitatBosqueSeco, igual, "si"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "no")
+            }, new Clause(Especie, igual, "Micrurus laticollaris"));
+
+        Rule r127 = new Rule(br, "R127_Micrurus_nigrocinctus",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "si"),
+                new Clause(CabezaNegra, igual, "si"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "si"),
+                new Clause(DistribucionSudamerica, igual, "no"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "si"),
+                new Clause(HabitatBosqueSeco, igual, "no"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus nigrocinctus"));
+
+        Rule r128 = new Rule(br, "R128_Micrurus_surinamensis",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "no"),
+                new Clause(CabezaNegra, igual, "no"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "si"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "si"),
+                new Clause(HabitatBosqueSeco, igual, "no"),
+                new Clause(HabitatAcuario, igual, "si"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus surinamensis"));
+
+        Rule r129 = new Rule(br, "R129_Micrurus_frontalis",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "si"),
+                new Clause(CabezaNegra, igual, "no"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "no"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "no"),
+                new Clause(HabitatBosqueSeco, igual, "si"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus frontalis"));
+
+        Rule r130 = new Rule(br, "R130_Micrurus_lemniscatus",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "no"),
+                new Clause(CabezaNegra, igual, "no"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "si"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "si"),
+                new Clause(HabitatBosqueSeco, igual, "no"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus lemniscatus"));
+
+        Rule r131 = new Rule(br, "R131_Micrurus_diastema",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "si"),
+                new Clause(CabezaNegra, igual, "si"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "si"),
+                new Clause(DistribucionSudamerica, igual, "no"),
+                new Clause(DistribucionMexico, igual, "si"),
+                new Clause(HabitatSelva, igual, "si"),
+                new Clause(HabitatBosqueSeco, igual, "no"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus diastema"));
+
+        Rule r132 = new Rule(br, "R132_Micrurus_pyrrhocryptus",
+            new Clause[]{
+                new Clause(Genero, igual, "Micrurus"),
+                new Clause(AnillosTricolor, igual, "si"),
+                new Clause(AnillosNegrosAnchos, igual, "no"),
+                new Clause(CabezaNegra, igual, "no"),
+                new Clause(ColaCorta, igual, "si"),
+                new Clause(DistribucionCentroamerica, igual, "no"),
+                new Clause(DistribucionSudamerica, igual, "si"),
+                new Clause(DistribucionMexico, igual, "no"),
+                new Clause(HabitatSelva, igual, "no"),
+                new Clause(HabitatBosqueSeco, igual, "si"),
+                new Clause(HabitatAcuario, igual, "no"),
+                new Clause(AnilloBlancoPresente, igual, "si")
+            }, new Clause(Especie, igual, "Micrurus pyrrhocryptus"));
+
+        Rule r133 = new Rule(br, "R133_CoralilloBalsas",
+            new Clause[]{
+                new Clause(Especie, igual, "Micrurus laticollaris")
+            }, new Clause(Especie, igual, "Coralillo de balsas")); 
+
+        Rule r134 = new Rule(br, "R134_Abronia_meledona",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "si"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia meledona"));
+
+        Rule r135 = new Rule(br, "R135_Abronia_mixteca",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "si"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia mixteca"));
+
+        Rule r136 = new Rule(br, "R136_Abronia_graminea",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "si"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia graminea"));
+
+        Rule r137 = new Rule(br, "R137_Abronia_lythrochila",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "si"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia lythrochila"));
+
+        Rule r138 = new Rule(br, "R138_Abronia_deppii",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "si"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia deppii"));
+
+        Rule r139 = new Rule(br, "R139_Abronia_taeniata",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "si"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia taeniata"));
+
+        Rule r140 = new Rule(br, "R140_Abronia_campbelli",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "si")
+            }, new Clause(Especie, igual, "Abronia campbelli"));
+
+        Rule r141 = new Rule(br, "R141_Abronia_frosti",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "si"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia frosti"));
+
+        Rule r142 = new Rule(br, "R142_Abronia_aurita",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "si"),
+                new Clause(EscamasQuilladas, igual, "no"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia aurita"));
+
+        Rule r143 = new Rule(br, "R143_Abronia_salvadorensis",
+            new Clause[]{
+                new Clause(Genero, igual, "Abronia"),
+                new Clause(ColaPrensil, igual, "si"),
+                new Clause(EscamasGrandes, igual, "si"),
+                new Clause(HabitatArboreo, igual, "si"),
+                new Clause(ColoracionRojiza, igual, "no"),
+                new Clause(ColoracionVerde, igual, "no"),
+                new Clause(ColoracionEsmeralda, igual, "no"),
+                new Clause(LabiosRojos, igual, "no"),
+                new Clause(ColaOscura, igual, "no"),
+                new Clause(BandaDorsal, igual, "no"),
+                new Clause(CabezaAncha, igual, "no"),
+                new Clause(OrejasVisibles, igual, "no"),
+                new Clause(EscamasQuilladas, igual, "si"),
+                new Clause(OjosGrandes, igual, "no")
+            }, new Clause(Especie, igual, "Abronia salvadorensis"));
+
+        Rule r144 = new Rule(br, "R144_DragonSierraMixteca",
+            new Clause[]{
+                new Clause(Especie, igual, "Abronia mixteca")
+            }, new Clause(Especie, igual, "Dragon Sierra Mixteca"));
+
+        Rule r145 = new Rule(br, "R145_Anolis_carolinensis",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "si"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(TamanoGrande, igual, "si"),
+                new Clause(HabitatUrbano, igual, "si"),
+                new Clause(DewlapRojo, igual, "no"),
+                new Clause(EscamasRugosas, igual, "si")
+            }, new Clause(Especie, igual, "Anolis carolinensis"));
+
+        Rule r146 = new Rule(br, "R146_Anolis_sagrei",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "no"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(HabitatUrbano, igual, "si"),
+                new Clause(DewlapRojo, igual, "no"),
+                new Clause(EscamasRugosas, igual, "si")
+            }, new Clause(Especie, igual, "Anolis sagrei"));
+
+        Rule r147 = new Rule(br, "R147_Anolis_porcatus",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "si"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(TamanoGrande, igual, "si"),
+                new Clause(HabitatUrbano, igual, "no"),
+                new Clause(DewlapRojo, igual, "si"),
+                new Clause(EscamasRugosas, igual, "no")
+            }, new Clause(Especie, igual, "Anolis porcatus"));
+
+        Rule r148 = new Rule(br, "R148_Anolis_cristatellus",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(HabitatUrbano, igual, "no"),
+                new Clause(DewlapRojo, igual, "no"),
+                new Clause(EscamasRugosas, igual, "si")
+            }, new Clause(Especie, igual, "Anolis cristatellus"));
+
+        Rule r149 = new Rule(br, "R149_Anolis_naufragus",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "si"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(HabitatUrbano, igual, "no"),
+                new Clause(DewlapRojo, igual, "si"),
+                new Clause(EscamasRugosas, igual, "si")
+            }, new Clause(Especie, igual, "Anolis naufragus"));
+
+        Rule r150 = new Rule(br, "R150_Anolis_equestris",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "si"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(TamanoGrande, igual, "si"),
+                new Clause(HabitatUrbano, igual, "no"),
+                new Clause(DewlapRojo, igual, "no"),
+                new Clause(EscamasRugosas, igual, "si")
+            }, new Clause(Especie, igual, "Anolis equestris"));
+
+        Rule r151 = new Rule(br, "R151_Anolis_cybotes",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "no"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(TamanoGrande, igual, "si"),
+                new Clause(HabitatUrbano, igual, "no"),
+                new Clause(DewlapRojo, igual, "no"),
+                new Clause(EscamasRugosas, igual, "si")
+            }, new Clause(Especie, igual, "Anolis cybotes"));
+
+        Rule r152 = new Rule(br, "R152_Anolis_chlorocyanus",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "si"),
+                new Clause(CrestaDorsal, igual, "no"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(HabitatUrbano, igual, "si"),
+                new Clause(DewlapRojo, igual, "si"),
+                new Clause(EscamasRugosas, igual, "no")
+            }, new Clause(Especie, igual, "Anolis chlorocyanus"));
+
+        Rule r153 = new Rule(br, "R153_Anolis_gorgonae",
+            new Clause[]{
+                new Clause(Genero, igual, "Anolis"),
+                new Clause(ColorVerdePredominante, igual, "si"),
+                new Clause(CrestaDorsal, igual, "si"),
+                new Clause(TamanoGrande, igual, "no"),
+                new Clause(HabitatUrbano, igual, "no"),
+                new Clause(DewlapRojo, igual, "no"),
+                new Clause(EscamasRugosas, igual, "no")
+            }, new Clause(Especie, igual, "Anolis gorgonae"));
+
+        Rule r154 = new Rule(br, "R154_AbaniquilloHidalgo",
+            new Clause[]{
+                new Clause(Especie, igual, "Anolis naufragus")
+            }, new Clause(Especie, igual, "Abaniquillo de Hidalgo"));               
+                            }
 }
