@@ -20,5 +20,10 @@
 
     <dependencies>
         <!-- Aquí solo agregas dependencias REALES de Maven Central si las necesitas -->
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE230</version>
+        </dependency>
     </dependencies>
 </project>
