@@ -2,8 +2,7 @@ package animal;
 
 <<<<<<< HEAD:src/main/java/animal/animalBR.java
 import animal.rule.*;
-=======
-import Rule.*;
+import animal.rule.Rule.*;
 
 /*public class animalBR {
 
